@@ -69,3 +69,6 @@ def password_generator():
         password = 'a' + password[1:]
     password = password[0].upper() + password[1:]
     return password 
+
+
+
