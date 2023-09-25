@@ -10,7 +10,7 @@ from django import forms
 from kernel.http.serialize import user
 
 from profiles.models import VerifyIdentifier
-from .validators import PasswordFields, FirstOrLastNameValidator
+from .validators import PasswordFields, FirstOrLastNameValidator, UserNameValidator
 from profiles import models as profile_models
 from django.db.models import Q
 
@@ -161,6 +161,12 @@ class EditProfileForm(forms.Form):
                 code='email_exists',
             )
         return email
+
+class UpDateUserName(forms.Form):
+    """
+        @description:
+    """
+    username = UserNameValidator(required=True)
 
 class VerifyIdentifierForm(forms.Form):
     """

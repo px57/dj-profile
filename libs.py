@@ -58,3 +58,14 @@ def connect_to_anonymous_user(request, response, dbUser, data):
         password=data['password']
     )
     login(request, dbUser)
+
+################################################## [GENERATE-ANONYMOUS-USER]
+def password_generator():
+    """
+        @description: This function generates the password
+    """
+    password = str(uuid4().hex)
+    if (password[0].isdigit()):
+        password = 'a' + password[1:]
+    password = password[0].upper() + password[1:]
+    return password 

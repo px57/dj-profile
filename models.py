@@ -8,6 +8,7 @@ from kernel.models.base_metadata_model import BaseMetadataModel
 from kernel.http.serialize.media import serialize_file_fields, serialize_phone_number, serialize_size_video
 from django.conf import settings
 from kernel.models.decorators import serializer_object
+from mediacenter.models import FilesModel
 
 class ForgetPassword(BaseMetadataModel):
     """_summary_
@@ -46,10 +47,13 @@ class Profile(BaseMetadataModel):
         on_delete=models.CASCADE,
     )
     
-    avatar = models.ImageField(
-        'Avatar',
-        upload_to='profile/%Y/%m/%d/',
-        default='assets/img/user1.jpg',
+    avatar = models.ForeignKey(
+        'mediacenter.FilesModel',
+        default=None,
+        null=True,
+        blank=True,
+        on_delete=models.CASCADE,
+        related_name='avatar'
     )
     
     group = models.CharField(
@@ -106,6 +110,18 @@ class Profile(BaseMetadataModel):
     default_params = {
         'send_email__tocomment': True,
     }
+
+    def get_serialized_avatar(self, request):
+        """
+            @description: Récupérer l'avatar de l'utilisateur.
+        """
+        if self.avatar is None:
+            # TODO: moove the default avatar into the settings
+            # FilesModel(
+            #     scr
+            # )
+            return None
+        return self.avatar.serialize(request)
     
     def get_settings_key(self, get_key):
         """_summary_
@@ -159,7 +175,7 @@ class Profile(BaseMetadataModel):
             '_object': self,
             '_update': {
                 'id': self.user.id,
-                'avatar': serialize_file_fields(request, self.avatar),
+                'avatar': self.get_serialized_avatar(request),
                 'username': self.user.username,
                 'first_name': self.user.first_name,
                 'last_name': self.user.last_name,

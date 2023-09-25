@@ -1,4 +1,5 @@
 
+from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.core.validators import MinLengthValidator, MaxLengthValidator
 from django.utils.translation import gettext as _
@@ -106,7 +107,7 @@ class FirstNameValidator(forms.Field):
         firstName = firstName.lower()
         if firstName in FORBIDDEN_FIRSTNAME:
             raise ValidationError(
-                _("Ce nom est interdit sur Venture Project"),
+                _("Ce nom est interdit sur " + settings.APP_NAME),
                 code='password_min_length'
             )
         return firstName
@@ -129,8 +130,29 @@ class LastNameValidator(forms.Field):
         lastname = lastname.lower()
         if lastname in FORBIDDEN_LASTNAME:
             raise ValidationError(
-                _("Ce prénom est interdit sur Venture Project"),
+                _("Ce prénom est interdit sur " + settings.APP_NAME),
                 code='password_min_length'
             )
         return lastname
 
+class UserNameValidator(forms.Field):
+    """
+        @description: Valider le pseudo de l'utilisateur
+    """   
+    default_validators = []
+
+    def __init__(self, required=True):
+        super().__init__()
+        self.required = required
+
+    def to_python(self, username):
+        """
+            @description:
+        """
+        username = username.lower()
+        if username in FORBIDDEN_FIRSTNAME:
+            raise ValidationError(
+                _("Ce pseudo est interdit sur " + settings.APP_NAME),
+                code='password_min_length'
+            )
+        return username
