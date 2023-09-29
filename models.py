@@ -161,8 +161,15 @@ class Profile(BaseMetadataModel):
             _type_: _description_
         """
         return {
-            'little': ['settings', 'user', 'email_verified', 'is_staff', 'activated', 'email'],
-        }.get(kwargs.get('serializer_type', None), ['settings', 'user', 'avatar', 'email_verified', 'is_staff', 'activated'])
+            'little': [
+                'settings', 
+                'user', 
+                'email_verified', 
+                'is_staff', 
+                'activated', 
+                'email',
+            ],
+        }.get(kwargs.get('serializer_type', None), ['settings', 'user', 'email_verified', 'is_staff', 'activated'])
 
     @serializer_object
     def serialize(self, request, *args, **kwargs):
