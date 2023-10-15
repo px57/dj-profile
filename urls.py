@@ -9,7 +9,7 @@ urlpatterns = [
     path(
         'signin/', 
         views.signin, 
-        name='signin'
+        name='profiles__signin'
     ),
     path(
         'signup/', 
@@ -19,43 +19,38 @@ urlpatterns = [
     path(
         'forget-password/', 
         views.forget_password, 
-        name='forget-password'
-    ),
-    path(
-        'reset-password-verify-token/', 
-        views.reset_password_verify_token, 
-        name='reset-password-verify-token'
+        name='profiles__forget_password'
     ),
     path(
         'reset-password/', 
         views.reset_password, 
-        name='reset-password'
+        name='profiles__reset_password'
     ),
     path(
         'verify-email/',
         views.verify_email,
-        name='verify-email'
+        name='profiles__verify_email'
     ),
     path(
         'me/',
         views.me,
-        name='me'
+        name='profiles__me'
     ),
     
     path(
         'logout/',
         views.logout,
-        name='logout'
+        name='profiles__logout'
     ),
     path(
         'update-password/',
         views.update_password,
-        name='update-password'
+        name='profiles__update_password'
     ),
 
     path(
         'update_profile/',
         views.update_profile,
-        name='update-profile'
+        name='profiles__update_profile'
     )
 ]

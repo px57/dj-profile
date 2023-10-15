@@ -47,6 +47,25 @@ class Profile(BaseMetadataModel):
         on_delete=models.CASCADE,
     )
     
+    language = models.CharField(
+        max_length=10,
+        default='en',
+        choices=(
+            ('fr', 'Français'),
+            ('en', 'English'),
+            ('es', 'Español'),
+            ('de', 'Deutsch'),
+            ('it', 'Italiano'),
+            ('pt', 'Português'),
+            ('ru', 'Русский'),
+            ('zh', '中文'),
+            ('ja', '日本語'),
+            ('ar', 'العربية'),
+            ('ko', '한국어'),
+            ('hi', 'हिन्दी'),
+        )
+    )
+
     avatar = models.ForeignKey(
         'mediacenter.FilesModel',
         default=None,
