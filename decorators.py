@@ -7,8 +7,10 @@ import json
 def load_profile_when_im_authenticated(request):
     """
         @description: 
+        @param.request: 
     """
     if not request.user.is_authenticated:
+        request.profile = None
         return None
 
     if hasattr(request, 'profile'):

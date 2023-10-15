@@ -1,5 +1,5 @@
 
-from mediacenter.rules.stack import RULESTACK
+from mediacenter.rules.stack import MEDIACENTER_RULESTACK
 from mediacenter.rules.defaul_rule_class import DefaultRuleClass
 
 class AvatarFileRule(DefaultRuleClass):
@@ -16,4 +16,4 @@ class AvatarFileRule(DefaultRuleClass):
         request.profile.save()
         return super().event_after_upload(request, instance)
 
-RULESTACK.set_rule(AvatarFileRule())
+MEDIACENTER_RULESTACK.set_rule(AvatarFileRule())

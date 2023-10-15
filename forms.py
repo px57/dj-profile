@@ -78,35 +78,10 @@ class ForgotPasswordForm(forms.Form):
         dbProfile = profile_models.Profile.objects.filter(user__email=email)
         if not dbProfile.exists():
             raise ValidationError(
-                _("account_not_found"),
-                code='account_not_found',
+                _("not_encountered"),
+                code='not_encountered',
             )
         return dbProfile.first()
-
-class ResetPasswordVerifyTokenForm(forms.Form):
-    """Recept the new user info."""
-    class Meta:
-        fields = ['token']
-        
-    token = forms.CharField(max_length=32, required=True)
-
-    def clean_token(self):
-        """Validation du token."""
-        token = self.cleaned_data.get('token')
-        dbToken = profile_models.ResetPasswordModels.objects.filter(token=token)
-        if not dbToken.exists():
-            raise ValidationError(
-                _("token_dont_exists"),
-                code='token_dont_exists',
-            )
-        
-        if dbToken.first().status != 'NEW':
-            raise ValidationError(
-                _("token_expired"),
-                code='token_expired',
-            )
-        
-        return dbToken.first()
 
 class ResetPasswordForm(forms.Form):
     """Recept the new user info."""

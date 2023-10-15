@@ -13,7 +13,6 @@ def update_password(request):
         'password': request.POST.get('password'),
         'confirm_password': request.POST.get('confirmPassword'),
     })
-    print ('aeouaoeu')
     if not form.is_valid():
         return res.form_error(form)
     request.profile.user.set_password(form.cleaned_data['password'])

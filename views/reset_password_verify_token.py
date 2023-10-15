@@ -1,5 +1,4 @@
 from kernel.http import Response
-from profiles.forms import ResetPasswordVerifyTokenForm
 from django.views.decorators.csrf import csrf_exempt
 from kernel.http.decorators import load_json
 
