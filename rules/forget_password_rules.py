@@ -11,25 +11,28 @@ class ForgetPasswordDefaultRule(InterfaceManager):
     """
 
     def frgpassword__email__params(
+            self,
             res: Response, 
             dbProfile: Profile, 
             dbToken: TokenModels):
         """
             @desription: Get the params to generate the email. 
         """
-        params = {
+        return {
             'email': dbProfile.user.email,
             'token': dbToken.token,
+            'url': self.frgpassword__email__url(res, dbProfile, dbToken)
         }
 
     def frgpassword__email__url(
+            self,
             res: Response, 
             dbProfile: Profile, 
             dbToken: TokenModels):
         """
             @description: Get the url to generate the email. 
         """
-        return 
+        return dbToken.create_redirect_url(res)
 
 FORGET_PASSWORD_RULESTACK = RulesStack()
 FORGET_PASSWORD_RULESTACK.set_rule(ForgetPasswordDefaultRule())
