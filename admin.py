@@ -7,14 +7,11 @@ class ProfileAdmin(admin.ModelAdmin):
         'user',
         'group',
     ]
-
-        
+    exclude = ['settings']
 
 @admin.register(ForgetPassword)
 class ForgetPasswordAdmin(admin.ModelAdmin):
-    list_display = [
-        'token'
-    ]
+    list_display = ['token']
 
 @admin.register(ResetPasswordModels)
 class ResetPasswordModelsAdmin(admin.ModelAdmin):

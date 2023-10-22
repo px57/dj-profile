@@ -70,5 +70,42 @@ def password_generator():
     password = password[0].upper() + password[1:]
     return password 
 
+################################################## [GENERATE-botnet-USER]
+def create_botnet(botnet_name: str):
+    """
+        @description:
+    """
+    dbUser = User(
+        username=botnet_name,
+        email=botnet_name + '@yopmail.com',
+        first_name=botnet_name,
+        last_name=botnet_name,
+        password=password_generator(),
+    )
+    dbUser.save()
+    dbProfile = profile_models.Profile(
+        user=dbUser,
+        isbotnet=True,
+    )
+    dbProfile.save()
+    return dbProfile
 
+def get_botnet(botnet_name: str) -> profile_models.Profile or None:
+    """
+        @description: 
+    """
+    dbProfile = profile_models.Profile.objects.filter(
+        user=botnet_name, 
+        isbotnet=True
+    )
+    return dbProfile.exists()
+
+def get_or_create_botnet(botnet_name: str):
+    """
+        @description: Create or get, botnet profile.
+    """
+    dbProfile = get_botnet(botnet_name)
+    if dbProfile:
+        return dbProfile
+    return create_botnet(botnet_name)
 

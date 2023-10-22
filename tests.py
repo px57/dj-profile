@@ -69,7 +69,6 @@ class ForgetPasswordTest(TestCase):
         try: 
           self.assertEqual(response.json()['success'], True)
         except:
-            print ('response.content', response.content)
             self.fail('forget password failed')
         # >>>>>>>>>>>>>>>>>>>>>>>>>>>>> [END] <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
         #>>>>>>>>>>>>>>>>>>>>>>>>>>>>> [VERIFY TOKEN] <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -93,5 +92,4 @@ class ForgetPasswordTest(TestCase):
         try: 
           self.assertEqual(response.json()['success'], True)
         except:
-            print ('response.content', response.content)
             self.fail('reset password failed')
