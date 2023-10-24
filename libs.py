@@ -108,4 +108,3 @@ def get_or_create_botnet(botnet_name: str):
     if dbProfile:
         return dbProfile
     return create_botnet(botnet_name)
-

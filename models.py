@@ -198,11 +198,17 @@ class Profile(BaseMetadataModel):
                 'last_name': self.user.last_name,
                 'email': self.user.email,
                 'is_staff': self.user.is_staff,
+                'birthdate': self.birthdate.strftime('%Y-%m-%d') if self.birthdate is not None else None,
             },
             '_exclude': self.serialize__exclude(*args, **kwargs),
             '_include': [],
         }
 
+    def __str__(self):
+        """
+            @description: 
+        """
+        return self.user.first_name + ' ' + self.user.last_name + ' (' + self.user.email + ')'
 
 profile__birthdate = models.DateField(
     null=True,
@@ -237,6 +243,7 @@ profile__language = models.CharField(
 profile__isbotnet = models.BooleanField(
     default=False,
 )
+
 
 Profile.add_to_class('language', profile__language)
 Profile.add_to_class('birthdate', profile__birthdate)
@@ -338,13 +345,8 @@ class NetWorkModels(BaseMetadataModel):
         serialized['icon'] = icone_list.get(self.key, '')
         return serialized
     
-
-
-
 # >>>>>>>>>>>>>>>>>>>>>>>>>> [END] <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 # >>>>>>>>>>>>>>>>>>>>>>>>>> [VERIFY IDENTIFIER] <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
-
 
 class VerifyIdentifier(BaseMetadataModel):
     profile = models.ForeignKey(
