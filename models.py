@@ -10,6 +10,7 @@ from django.conf import settings
 from kernel.models.decorators import serializer_object
 from mediacenter.models import FilesModel
 
+# >>>>>>>>>>>>>>>>>>>>>>>>>> [FORGET PASSWORD] <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 class ForgetPassword(BaseMetadataModel):
     """_summary_
 
@@ -31,6 +32,13 @@ class ForgetPassword(BaseMetadataModel):
         """
         serialize = model_to_dict(self)
         return serialize
+    
+
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>> [END] <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+# >>>>>>>>>>>>>>>>>>>>>>>>>> [BREAK TIME] <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
 
 class BreakTimeModels(BaseMetadataModel):
     """_summary_
@@ -41,31 +49,19 @@ class BreakTimeModels(BaseMetadataModel):
     last_use = models.DateTimeField()
     key = models.CharField(max_length=255)
 
+
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>> [END] <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+# >>>>>>>>>>>>>>>>>>>>>>>>>> [PROFILE] <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
 class Profile(BaseMetadataModel):
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
     )
     
-    language = models.CharField(
-        max_length=10,
-        default='en',
-        choices=(
-            ('fr', 'Français'),
-            ('en', 'English'),
-            ('es', 'Español'),
-            ('de', 'Deutsch'),
-            ('it', 'Italiano'),
-            ('pt', 'Português'),
-            ('ru', 'Русский'),
-            ('zh', '中文'),
-            ('ja', '日本語'),
-            ('ar', 'العربية'),
-            ('ko', '한국어'),
-            ('hi', 'हिन्दी'),
-        )
-    )
-
     avatar = models.ForeignKey(
         'mediacenter.FilesModel',
         default=None,
@@ -82,11 +78,6 @@ class Profile(BaseMetadataModel):
             ('player', 'Player'),
         ),
         default='player',
-    )
-    
-    settings = models.JSONField(
-        default={}, 
-        null=False,
     )
 
     email_verified = models.BooleanField(
@@ -207,10 +198,62 @@ class Profile(BaseMetadataModel):
                 'last_name': self.user.last_name,
                 'email': self.user.email,
                 'is_staff': self.user.is_staff,
+                'birthdate': self.birthdate.strftime('%Y-%m-%d') if self.birthdate is not None else None,
             },
             '_exclude': self.serialize__exclude(*args, **kwargs),
             '_include': [],
         }
+
+    def __str__(self):
+        """
+            @description: 
+        """
+        return self.user.first_name + ' ' + self.user.last_name + ' (' + self.user.email + ')'
+
+profile__birthdate = models.DateField(
+    null=True,
+    blank=True,
+)
+
+profile__settings = models.JSONField(
+    default={}, 
+    null=False,
+    blank=False,
+)
+
+profile__language = models.CharField(
+    max_length=10,
+    default='en',
+    choices=(
+        ('fr', 'Français'),
+        ('en', 'English'),
+        ('es', 'Español'),
+        ('de', 'Deutsch'),
+        ('it', 'Italiano'),
+        ('pt', 'Português'),
+        ('ru', 'Русский'),
+        ('zh', '中文'),
+        ('ja', '日本語'),
+        ('ar', 'العربية'),
+        ('ko', '한국어'),
+        ('hi', 'हिन्दी'),
+    )
+)
+
+profile__isbotnet = models.BooleanField(
+    default=False,
+)
+
+
+Profile.add_to_class('language', profile__language)
+Profile.add_to_class('birthdate', profile__birthdate)
+Profile.add_to_class('settings', profile__settings)
+Profile.add_to_class('isbotnet', profile__isbotnet)
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>> [END] <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+# >>>>>>>>>>>>>>>>>>>>>>>>>> [RESET PASSWORD] <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
 
 class ResetPasswordModels(BaseMetadataModel):
     """
@@ -252,6 +295,13 @@ class ResetPasswordModels(BaseMetadataModel):
         """
         return model_to_dict(self)
     
+
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>> [END] <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+# >>>>>>>>>>>>>>>>>>>>>>>>>> [NETWORK] <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
 class NetWorkModels(BaseMetadataModel):
     """
         @description: La liste des éléments de networks.
@@ -295,6 +345,9 @@ class NetWorkModels(BaseMetadataModel):
         serialized['icon'] = icone_list.get(self.key, '')
         return serialized
     
+# >>>>>>>>>>>>>>>>>>>>>>>>>> [END] <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+# >>>>>>>>>>>>>>>>>>>>>>>>>> [VERIFY IDENTIFIER] <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
 class VerifyIdentifier(BaseMetadataModel):
     profile = models.ForeignKey(
         Profile,

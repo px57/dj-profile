@@ -18,9 +18,10 @@ class ProfileEmails(object):
             @param.dbProfile -> Profile
             @param.dbToken -> Token 
         """
-        # print (res.get_interface().email_forget_password_params(res, dbProfile, dbToken))
         params = res.get_interface().frgpassword__email__params(res, dbProfile, dbToken)
+        print ('################################')
         print (params)
+        # TODO: Send the email.
 
     def WELCOME(self, dbProfile: Profile):
         """
