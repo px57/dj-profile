@@ -9,6 +9,7 @@ from kernel.http.serialize.media import serialize_file_fields, serialize_phone_n
 from django.conf import settings
 from kernel.models.decorators import serializer_object
 from mediacenter.models import FilesModel
+# from enterprise.models import EmployeeRoleModel
 
 # >>>>>>>>>>>>>>>>>>>>>>>>>> [FORGET PASSWORD] <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 class ForgetPassword(BaseMetadataModel):
@@ -116,6 +117,20 @@ class Profile(BaseMetadataModel):
         if self.user is None:
             return ''
         return self.user.email
+    
+    @property
+    def enterprise_name(self):
+        """
+            @description: Récupérer le nom de l'entreprise.
+        """
+        return 'aoeuaoeu'
+    
+    @property
+    def enterprise_role(self):
+        """
+            @description: Récupérer le role de l'entreprise.
+        """
+        return 'aoeuaoeu'
     
     default_params = {
         'send_email__tocomment': True,

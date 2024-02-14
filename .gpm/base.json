@@ -1,0 +1,8 @@
+{
+    "base_path": "/var/projects/rakam/haliro-back/dj-profile/.gpm/base.json",
+    "gpm_path": "/var/projects/rakam/haliro-back/dj-profile/.gpm",
+    "name": "dj-profile",
+    "project_type": "module",
+    "repository_url": "https://github.com/px57/dj-profile.git",
+    "root_path": "/var/projects/rakam/haliro-back/dj-profile"
+}
