@@ -7,7 +7,7 @@ class DefaultRuleClass(DefaultRuleClass):
     The default rule class. 
     """
 
-    label = 'PROFILE_CATEGORY'
+    label = 'PROFILE'
 
     allow = True
 
