@@ -1,5 +1,6 @@
 from kernel.http import Response
 from kernel.http.decorators import load_json
+from kernel.http import load_response
 
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
@@ -8,10 +9,12 @@ from profiles import forms as profile_forms
 from profiles import models as profile_models
 from profiles import libs as profile_libs
 
+from profiles.rules.stack import PROFILES_RULESTACK
 
 def signup_anonymous_profile(
         dbProfile, 
         cleaned_data,
+        res=None
     ):
     """
         @description: 
@@ -36,13 +39,18 @@ def signup_anonymous_profile(
     return res.success()
 
 
+
 @csrf_exempt
 @load_json
-def signup(request):
+@load_response(stack=PROFILES_RULESTACK)
+def signup(request, res=None):
     """
         @description: This function handles the signup request
     """
-    res = Response()
+    print (res.get_stack())
+    print (res.interface())
+    return res.success()
+
     formResp = profile_forms.SignupUserForm(request.POST)
     if not formResp.is_valid():
         return res.form_error(formResp)

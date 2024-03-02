@@ -7,7 +7,7 @@ from django.conf import settings
 
 from profiles.models import ResetPasswordModels, Profile
 from profiles.forms import ForgotPasswordForm
-from profiles.rules.forget_password_rules import FORGET_PASSWORD_RULESTACK
+# from profiles.rules.forget_password_rules import FORGET_PASSWORD_RULESTACK
 from profiles.emails import ProfileEmails
 
 from token_manager.libs import create_token, find_token
@@ -33,7 +33,7 @@ def defineResetPasswordSessionValue(request, dbProfile, dBresetPasswordModels):
 
 @csrf_exempt
 @load_json
-@load_interface(FORGET_PASSWORD_RULESTACK)
+# @load_interface(FORGET_PASSWORD_RULESTACK)
 def forget_password(request):
     """
         @description: This function handles the forget password request
