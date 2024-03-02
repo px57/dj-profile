@@ -7,7 +7,6 @@ from django.conf import settings
 
 from profiles.models import ResetPasswordModels, Profile
 from profiles.forms import ForgotPasswordForm
-from profiles.emails import ProfileEmails
 
 from token_manager.libs import create_token, find_token
 from token_manager.models import TokenModels
@@ -50,5 +49,4 @@ def forget_password(request):
         relatedModelId=dbProfile.id
     )
 
-    ProfileEmails().FORGET_PASSWORD(res, dbProfile, dbToken)
     return res.success()

@@ -10,6 +10,12 @@ from profiles import models as profile_models
 from profiles import libs as profile_libs
 
 from profiles.rules.stack import PROFILES_RULESTACK
+from profiles.__interface__.token_manager import TokenVerifyProfileRule 
+# from profiles.__interface__.mailling import 
+
+from token_manager.rules.stack import TOKEN_MANAGER_RULESTACK
+from token_manager.libs import create_token
+
 
 def signup_anonymous_profile(
         dbProfile, 
@@ -74,10 +80,14 @@ def signup(request, res=None):
     )
     dbProfile.save()
     
-    # dbVerify = profile_libs.generate_verify_token(dbProfile)
-    # profile_libs.send_verify_token_with_email(dbVerify)
+    dbToken = create_token(
+        TOKEN_MANAGER_RULESTACK.get_rule(TokenVerifyProfileRule),
+        relatedModelId=dbProfile.id
+    )
 
-    # res.DEV = {
-    #     "verify_email_token": dbVerify.token
-    # }
+
+    
+    res.DEV = {
+        "verify_email_token": dbToken.token
+    }
     return res.success()
