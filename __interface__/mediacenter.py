@@ -16,4 +16,4 @@ class AvatarFileRule(DefaultRuleClass):
         request.profile.save()
         return super().event_after_upload(request, instance)
 
-MEDIACENTER_RULESTACK.set_rule(AvatarFileRule())
+MEDIACENTER_RULESTACK.set_rule(AvatarFileRule)

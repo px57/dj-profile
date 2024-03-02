@@ -23,4 +23,4 @@ class DefaultRuleClass(InterfaceManager):
 
     
 
-PROFILES_RULESTACK.set_rule(DefaultRuleClass())
+PROFILES_RULESTACK.set_rule(DefaultRuleClass)

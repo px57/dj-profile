@@ -47,6 +47,7 @@ def signup(request, res=None):
     """
         @description: This function handles the signup request
     """
+    _in = res.get_interface()
     formResp = profile_forms.SignupUserForm(request.POST)
     if not formResp.is_valid():
         return res.form_error(formResp)

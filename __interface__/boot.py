@@ -30,4 +30,4 @@ class ProfileBoot(DefaultRuleClass):
             return 
         res.profile = request.user.profile.serialize(request)
 
-BOOT_RULESTACK.set_rule(ProfileBoot())
+BOOT_RULESTACK.set_rule(ProfileBoot)
