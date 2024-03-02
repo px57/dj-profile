@@ -7,7 +7,6 @@ from django.conf import settings
 
 from profiles.models import ResetPasswordModels, Profile
 from profiles.forms import ForgotPasswordForm
-# from profiles.rules.forget_password_rules import FORGET_PASSWORD_RULESTACK
 from profiles.emails import ProfileEmails
 
 from token_manager.libs import create_token, find_token
