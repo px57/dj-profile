@@ -9,7 +9,10 @@ from profiles import models as profile_models
 from profiles import libs as profile_libs
 
 
-def signup_anonymous_profile(dbProfile, cleaned_data):
+def signup_anonymous_profile(
+        dbProfile, 
+        cleaned_data,
+    ):
     """
         @description: 
     """

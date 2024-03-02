@@ -27,3 +27,20 @@ def load_profile(function):
     wrap.__doc__ = function.__doc__
     wrap.__name__ = function.__name__
     return wrap
+
+def profile_required(function):
+    """
+    Verifie si le profile est chargé.
+    """
+    def wrap(request, *args, **kwargs):
+        if not request.profile:
+            res = Response(request=request)
+            return res.error(
+                'Profile not found', 
+                code=404
+            )
+        return function(request, *args, **kwargs)
+    
+    wrap.__doc__ = function.__doc__
+    wrap.__name__ = function.__name__
+    return wrap
