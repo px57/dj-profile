@@ -88,6 +88,6 @@ def signup(request, res=None):
 
     
     res.DEV = {
-        "verify_email_token": dbToken.token
+        "verify_email_token": dbToken.create_redirect_url(res)
     }
     return res.success()
