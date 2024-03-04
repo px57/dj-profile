@@ -19,7 +19,9 @@ class DefaultRuleClass(InterfaceManager):
     """
     The allow flag to enable or disable the rule.
     """
-    description = 'Rule interface for the mobile profile'
+    description = 'Configure the default rule class to manage the profile interface.'
+
+
 
     
 

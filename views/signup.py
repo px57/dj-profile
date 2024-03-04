@@ -10,12 +10,13 @@ from profiles import models as profile_models
 from profiles import libs as profile_libs
 
 from profiles.rules.stack import PROFILES_RULESTACK
-from profiles.__interface__.token_manager import TokenVerifyProfileRule 
-# from profiles.__interface__.mailling import 
+from profiles.__interface__.token_manager import TokenVerifyProfileRule  
+from profiles.__interface__.mailling import MailVerifyProfile
 
 from token_manager.rules.stack import TOKEN_MANAGER_RULESTACK
 from token_manager.libs import create_token
 
+from kernel.message.centralize import switcher_send_message
 
 def signup_anonymous_profile(
         dbProfile, 
@@ -85,8 +86,18 @@ def signup(request, res=None):
         relatedModelId=dbProfile.id
     )
 
+    switcher_send_message(
+        _inSwitch=MailVerifyProfile,
+        res=res,
+        sendTo=dbProfile,
+        sendBy=dbProfile,
+        params={
+            'VERIFY_URL_TOKEN': dbToken.create_redirect_url(res)
+        }
+    )
 
-    
+    res.profile = dbProfile.serialize(request)
+
     res.DEV = {
         "verify_email_token": dbToken.create_redirect_url(res)
     }
