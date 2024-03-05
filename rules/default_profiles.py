@@ -42,5 +42,16 @@ class DefaultRuleClass(InterfaceManager):
     """
     service_module = 'profiles.__services__'
 
+    """
+    Run the authentication process.
+    """
+    def authenticate(self, **kwargs):
+        """
+        Run the authentication process.
+        """
+        self.gpm_service.set_config(self)
+        print (self.gpm_service.config)
+        self.gpm_service.authenticate(**kwargs)
+
 
 PROFILES_RULESTACK.set_rule(DefaultRuleClass)

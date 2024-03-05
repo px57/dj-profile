@@ -47,6 +47,7 @@ def signin(request, res=None):
         username=dbUser.username, 
         password=password
     )
+    _in.authenticate(user=user)
     
     if user is None:
         res.form_error = form_error

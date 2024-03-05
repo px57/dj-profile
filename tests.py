@@ -51,6 +51,13 @@ def createBasicProfile(**kwargs) -> Profile:
     return dbProfile
 
 
+class SignupTest(TestCase):
+    """
+    Signup test.
+    """
+  
+
+
 class ForgetPasswordTest(TestCase):
     """
       @description: 
