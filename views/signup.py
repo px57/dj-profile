@@ -92,7 +92,8 @@ def signup(request, res=None):
         sendTo=dbProfile,
         sendBy=dbProfile,
         params={
-            'VERIFY_URL_TOKEN': dbToken.create_redirect_url(res)
+            'VERIFY_URL_TOKEN': dbToken.create_redirect_url(res),
+            'dbProfile': dbProfile
         }
     )
 

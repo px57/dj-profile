@@ -1,19 +1,23 @@
 from kernel.http import Response
 from kernel.http.decorators import load_json
+from kernel.http import load_response
+
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from profiles.models import Profile
 from django.contrib.auth import authenticate, login, logout
 import re
 
+from profiles.rules.stack import PROFILES_RULESTACK
 
 @csrf_exempt
 @load_json
-def signin(request):
+@load_response(stack=PROFILES_RULESTACK)
+def signin(request, res=None):
     """
         @description: This function handles the signin request
     """
-    res = Response()
+    _in = res.get_interface()
     form_error = {
         '__signin__': ['not_exists']
     }
@@ -39,7 +43,11 @@ def signin(request):
         }
         return res.error('profile_dont_exists')
 
-    user = authenticate(username=dbUser.username, password=password)
+    user = authenticate(
+        username=dbUser.username, 
+        password=password
+    )
+    
     if user is None:
         res.form_error = form_error
         return res.error('after_user_authenticate')

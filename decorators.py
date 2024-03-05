@@ -1,8 +1,15 @@
 
+from django.conf import settings
+from django.http import JsonResponse
 from django.contrib.auth.models import User
+
 from kernel.http import Response
+
 from profiles.models import Profile
-import json
+
+from functools import wraps
+
+import jwt
 
 def load_profile_when_im_authenticated(request):
     """
@@ -43,4 +50,21 @@ def profile_required(function):
     
     wrap.__doc__ = function.__doc__
     wrap.__name__ = function.__name__
+    return wrap
+
+def jwt_required(f):
+    @wraps(f)
+    def wrap(request, *args, **kwargs):
+        token = request.headers.get('Authorization', None)
+        if token is None:
+            return JsonResponse({'error': 'Missing token'}, status=401)
+        try:
+            payload = jwt.decode(token, settings.JWT_SECRET, algorithms=[settings.JWT_ALGORITHM])
+            request.user_id = payload['user_id']
+        except jwt.ExpiredSignatureError:
+            return JsonResponse({'error': 'Token expired'}, status=401)
+        except jwt.InvalidTokenError:
+            return JsonResponse({'error': 'Invalid token'}, status=401)
+
+        return f(request, *args, **kwargs)
     return wrap
