@@ -9,3 +9,5 @@ from .logout import logout
 from .me import me
 from .update_profile import update_profile
 from .update_password import update_password
+from .update_email import update_email
+# from .select_country import select_country

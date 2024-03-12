@@ -52,5 +52,17 @@ urlpatterns = [
         'update_profile/',
         views.update_profile,
         name='profiles__update_profile'
-    )
+    ),
+
+    path(
+        'update_email/',
+        views.update_email,
+        name='profiles__update_email'
+    ),
+
+    # path(
+    #     'select_country/',
+    #     views.select_country,
+    #     name='profiles__select_country'
+    # )    
 ]

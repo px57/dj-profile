@@ -21,7 +21,7 @@ class DefaultRuleClass(InterfaceManager):
     """
     description = 'Configure the default rule class to manage the profile interface.'
 
-
+    # ******************************************************* [SERVICES] *******************************************************
     """
     The authentification services, is the default service to be used.
     """
@@ -41,6 +41,8 @@ class DefaultRuleClass(InterfaceManager):
     Service module.
     """
     service_module = 'profiles.__services__'
+
+    # ******************************************************* [EMAIL] *******************************************************
 
     """
     Run the authentication process.

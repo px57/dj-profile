@@ -2,7 +2,6 @@
 from category.__rules__.stack import CATEGORY_RULESTACK
 from category.__rules__.default_category import DefaultRuleClass
 
-CATEGORY_CACHE = {}
 
 class ProfileCategoryRule(DefaultRuleClass):
     """

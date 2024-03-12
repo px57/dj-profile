@@ -169,3 +169,21 @@ class VerifyIdentifierForm(forms.Form):
             )
         return dbVerify.first()
     
+class UpdateEmailForm(forms.Form):
+    """
+        @description: 
+    """
+    email = forms.EmailField(required=True)
+
+    def clean_email(self):
+        """
+            @description: 
+        """
+        email = self.cleaned_data.get('email')
+        dbUser = User.objects.filter(email=email)
+        if dbUser.exists():
+            raise ValidationError(
+                'email_exists',
+                code='email_exists',
+            )
+        return email
