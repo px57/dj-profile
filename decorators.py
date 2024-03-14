@@ -1,11 +1,9 @@
 
-from django.conf import settings
-from django.http import JsonResponse
-from django.contrib.auth.models import User
+# from django.conf import settings
+# from django.http import JsonResponse
+# from django.contrib.auth.models import User
 
-from kernel.http import Response
-
-from profiles.models import Profile
+# from kernel.http import Response
 
 from functools import wraps
 
@@ -16,6 +14,7 @@ def load_profile_when_im_authenticated(request):
         @description: 
         @param.request: 
     """
+    from profiles.models import Profile
     if not request.user.is_authenticated:
         request.profile = None
         return None
@@ -39,6 +38,8 @@ def profile_required(function):
     """
     Verifie si le profile est chargé.
     """
+    from kernel.http import Response
+
     def wrap(request, *args, **kwargs):
         if not request.profile:
             res = Response(request=request)
@@ -53,6 +54,11 @@ def profile_required(function):
     return wrap
 
 def jwt_required(f):
+    from django.conf import settings
+    from django.http import JsonResponse
+    from functools import wraps
+
+
     @wraps(f)
     def wrap(request, *args, **kwargs):
         token = request.headers.get('Authorization', None)
@@ -68,3 +74,16 @@ def jwt_required(f):
 
         return f(request, *args, **kwargs)
     return wrap
+
+def interface_load_profile(__class):
+    """
+    Charge le profile à l'intérieurs des éléments.
+    """
+    def wrap(self, *args, **kwargs):
+        load_profile_when_im_authenticated(self.request)
+        return __class(self, *args, **kwargs)
+    
+    wrap.__doc__ = __class.__doc__
+    wrap.__name__ = __class.__name__
+    return wrap
+
