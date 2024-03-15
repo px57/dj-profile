@@ -38,4 +38,23 @@ class SelectCountry(DefaultRuleClass):
             'relatedModel': Profile.__module__ + '.' + Profile.__name__,
         }
 
+    # ***************************[FIND CITY]*****************************************
+    find_city_in_country = True
+
+    @interface_load_profile
+    def gpm__viewparams__find_city(self):
+        """
+        Get the selecteable countries.
+        """
+        from geo.models import CountriesRelated
+        from profiles.models import Profile
+
+        dbCountriesRelated = CountriesRelated.objects.filter(
+            relatedModelId=self.request.profile.id,
+            relatedModel=Profile.__module__ + '.' + Profile.__name__,
+        ).first()
+        return {
+            'country': dbCountriesRelated.country,
+        }
+
 GEO_RULESTACK.add_rule(SelectCountry)
