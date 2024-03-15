@@ -7,6 +7,8 @@ class AvatarFileRule(DefaultRuleClass):
         @description: This class is the avatar file rule
     """
 
+    autocrop_allow = True
+
     @property
     def label(self):
         return 'avatar'

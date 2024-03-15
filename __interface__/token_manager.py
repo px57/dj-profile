@@ -3,6 +3,9 @@
 from token_manager.rules.defaul_rule_class import DefaultRuleClass, DigitalNumericRuleClass
 from token_manager.rules.stack import TOKEN_MANAGER_RULESTACK
 
+from datetime import timedelta
+
+
 class TokenVerifyProfileRule(DefaultRuleClass):
     """
     Verify the email profile with url link.

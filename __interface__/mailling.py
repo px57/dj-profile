@@ -7,6 +7,7 @@ class MailVerifyProfile(DefaultRuleClass):
     This rule is used to send an email
     """
     label = 'PROFILE:VERIFY_PROFILE'
+    
     unsubscribe_enable = False
 
 
