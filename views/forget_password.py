@@ -1,7 +1,7 @@
-from kernel.http.decorators import load_json
-from kernel.http import Response
-from kernel.http import load_response 
-from kernel.message.centralize import switcher_send_message
+from gpm.http.decorators import load_json
+from gpm.http import Response
+from gpm.http import load_response 
+from gpm.message.centralize import switcher_send_message
 
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings

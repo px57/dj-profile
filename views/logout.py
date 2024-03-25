@@ -1,5 +1,5 @@
 from django.contrib.auth import logout as django_logout
-from kernel.http import Response
+from gpm.http import Response
 
 
 

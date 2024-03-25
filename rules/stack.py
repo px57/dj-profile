@@ -1,4 +1,4 @@
 
-from kernel.interfaces.stack import RulesStack
+from gpm.interfaces.stack import RulesStack
 
 PROFILES_RULESTACK = RulesStack()

@@ -1,4 +1,4 @@
-from kernel.http import Response
+from gpm.http import Response
 from profiles import models as profile_models
 
 def me(request):

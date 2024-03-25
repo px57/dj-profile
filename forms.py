@@ -7,7 +7,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django import forms
 
-from kernel.http.serialize import user
+from gpm.http.serialize import user
 
 from profiles.models import VerifyIdentifier
 from .validators import PasswordFields, FirstOrLastNameValidator, UserNameValidator

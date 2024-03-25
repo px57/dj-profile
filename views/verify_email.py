@@ -1,5 +1,5 @@
-from kernel.http import Response
-from kernel.http.decorators import load_json
+from gpm.http import Response
+from gpm.http.decorators import load_json
 from django.views.decorators.csrf import csrf_exempt
 from profiles.forms import VerifyIdentifierForm
 

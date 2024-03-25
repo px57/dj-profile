@@ -1,6 +1,6 @@
 
 
-from kernel.http.decorators import load_response
+from gpm.http.decorators import load_response
 
 from profiles.rules.stack import PROFILES_RULESTACK
 from profiles.forms import UpdateEmailForm

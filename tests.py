@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 
-from kernel.http.request import FakeRequest
+from gpm.http.request import FakeRequest
 
 from profiles.models import Profile
 

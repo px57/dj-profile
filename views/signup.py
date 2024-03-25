@@ -1,6 +1,6 @@
-from kernel.http import Response
-from kernel.http.decorators import load_json
-from kernel.http import load_response
+from gpm.http import Response
+from gpm.http.decorators import load_json
+from gpm.http import load_response
 
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
@@ -16,7 +16,7 @@ from profiles.__interface__.mailling import MailVerifyProfile
 from token_manager.rules.stack import TOKEN_MANAGER_RULESTACK
 from token_manager.libs import create_token
 
-from kernel.message.centralize import switcher_send_message
+from gpm.message.centralize import switcher_send_message
 
 def signup_anonymous_profile(
         dbProfile, 

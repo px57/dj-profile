@@ -38,7 +38,7 @@ def profile_required(function):
     """
     Verifie si le profile est chargé.
     """
-    from kernel.http import Response
+    from gpm.http import Response
 
     def wrap(request, *args, **kwargs):
         if not request.profile:

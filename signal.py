@@ -1,4 +1,4 @@
-from kernel.signal import SIGNAL_CENTER
+from gpm.signal import SIGNAL_CENTER
 
 SIGNAL_CENTER.create(
     'profile.load_me',

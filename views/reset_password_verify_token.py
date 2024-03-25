@@ -1,6 +1,6 @@
-from kernel.http import Response
+from gpm.http import Response
 from django.views.decorators.csrf import csrf_exempt
-from kernel.http.decorators import load_json
+from gpm.http.decorators import load_json
 
 @csrf_exempt
 @load_json

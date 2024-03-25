@@ -1,5 +1,5 @@
 
-from kernel.http import Response
+from gpm.http import Response
 from profiles.decorators import load_profile
 from profiles.forms import UpDateUserName
 

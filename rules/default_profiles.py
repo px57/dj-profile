@@ -3,7 +3,7 @@
 from django.utils import timezone
 import os
 from profiles.rules.stack import PROFILES_RULESTACK
-from kernel.interfaces.interfaces import InterfaceManager
+from gpm.interfaces.interfaces import InterfaceManager
 import PIL
 
 class DefaultRuleClass(InterfaceManager):

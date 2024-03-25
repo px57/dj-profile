@@ -4,10 +4,10 @@ from lib2to3.pytree import Base
 from django.db import models
 from django.contrib.auth.models import User
 from django.forms import model_to_dict
-from kernel.models.base_metadata_model import BaseMetadataModel
-from kernel.http.serialize.media import serialize_file_fields, serialize_phone_number, serialize_size_video
+from gpm.models.base_metadata_model import BaseMetadataModel
+from gpm.http.serialize.media import serialize_file_fields, serialize_phone_number, serialize_size_video
 from django.conf import settings
-from kernel.models.decorators import serializer_object
+from gpm.models.decorators import serializer_object
 from mediacenter.models import FilesModel
 # from enterprise.models import EmployeeRoleModel
 
