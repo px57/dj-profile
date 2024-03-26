@@ -57,6 +57,17 @@ class SelectCountry(DefaultRuleClass):
             'country': dbCountriesRelated.country,
         }
     
+    # ***************************[SELECT CITY]*****************************************
+    """
+    The view of select city, is login required.
+    """
+    gpm__loginrequired__select_city = True
+
+    """
+    Force load the profile in the loadprofile.
+    """
+    gpm__loadprofile__select_city = True
+
     @interface_load_profile
     def gpm__viewparams__select_city(self):
         """

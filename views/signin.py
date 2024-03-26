@@ -13,11 +13,11 @@ from profiles.rules.stack import PROFILES_RULESTACK
 @csrf_exempt
 @load_json
 @load_response(stack=PROFILES_RULESTACK)
-def signin(request, res=None):
+def signin(request, res=None, _in=None):
     """
         @description: This function handles the signin request
     """
-    _in = res.get_interface()
+    # _in = res.get_interface()
     form_error = {
         '__signin__': ['not_exists']
     }
